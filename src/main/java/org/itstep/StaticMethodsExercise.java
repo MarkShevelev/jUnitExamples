@@ -1,6 +1,6 @@
 package org.itstep;
 
-public class StaticMethods {
+public class StaticMethodsExercise {
     /**
      * A function to calculate positive power with optimization
      * */
