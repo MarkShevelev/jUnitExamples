@@ -5,13 +5,19 @@ public class StaticMethods {
      * A function to calculate positive power with optimization
      * */
     public static double positivePower(double base, int exponent) {
-        double res = 1.;
-        int reducingExponent = 0 == exponent%2 ? exponent-1 : exponent;
-        while (0 != reducingExponent) {
-            res *= 0 == reducingExponent%2 ? res : base;
-            reducingExponent = 0 == reducingExponent%2 ? reducingExponent/2 : reducingExponent -1;
-        }
+        if (exponent < 0) throw new IllegalArgumentException("Negative exponent not allowed!");
 
-        return res*(0 == exponent%2 ? base : 1.);
+        if (0 == exponent) return 1.;
+        double res = 1.;
+        while (1 < exponent) {
+            if (0 == exponent%2) {
+                base *= base;
+                exponent /= 2;
+            } else {
+                res *= base;
+                --exponent;
+            }
+        }
+        return res*base;
     }
 }
