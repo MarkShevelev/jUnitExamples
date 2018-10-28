@@ -1,18 +1,17 @@
 package org.itstep;
 
 public class StaticMethods {
-    public static double sqr(double x) {
-        return x*x;
-    }
+    /**
+     * A function to calculate positive power with optimization
+     * */
+    public static double positivePower(double base, int exponent) {
+        double res = 1.;
+        int reducingExponent = 0 == exponent%2 ? exponent-1 : exponent;
+        while (0 != reducingExponent) {
+            res *= 0 == reducingExponent%2 ? res : base;
+            reducingExponent = 0 == reducingExponent%2 ? reducingExponent/2 : reducingExponent -1;
+        }
 
-    public static double positive_power(double base, int exponent) {
-       return 0 == exponent%2
-               ? sqr(positive_power(base,exponent/2))
-               : base*sqr(positive_power(base,(exponent-1)/2));
-    }
-
-    public static double power_tailrec(double base, double res, int exponent) {
-        if (0 == exponent) return res;
-        return power_tailrec(base,0 == exponent%2 ? res*res : res*base, 0 == exponent%2 ? exponent/2 : exponent - 1);
+        return res*(0 == exponent%2 ? base : 1.);
     }
 }
